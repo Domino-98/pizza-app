@@ -15,8 +15,10 @@ export default {
 </script>
 
 <template>
+
   	<Nav />
-	<h1>{{ msg }}</h1>
+	<router-view />
+
 </template>
 
 <style>
