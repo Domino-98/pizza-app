@@ -1,24 +1,22 @@
 <script>
-import Nav from './components/Nav.vue'
+import Nav from "./components/Nav.vue";
 
 export default {
-	name: "App",
-	components: {
-		Nav,
-	},
-	data() {
-		return {
-			msg: "Pizza app",
-		}
-	}
-}
+  name: "App",
+  components: {
+    Nav,
+  },
+  data() {
+    return {
+      msg: "Pizza app",
+    };
+  },
+};
 </script>
 
 <template>
-
-  	<Nav />
-	<router-view />
-
+  <Nav />
+  <router-view />
 </template>
 
 <style>

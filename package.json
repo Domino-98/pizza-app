@@ -4,7 +4,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
+    "format": "prettier .  --write"
   },
   "dependencies": {
     "vue": "^3.2.16",
@@ -18,7 +20,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-vue": "^7.20.0",
     "postcss": "^8.3.11",
-    "prettier": "^2.4.1",
+    "prettier": "2.4.1",
     "tailwindcss": "^2.2.17",
     "vite": "^2.6.4"
   },
