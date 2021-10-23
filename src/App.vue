@@ -1,10 +1,10 @@
 <script>
-import Nav from "./components/Nav.vue";
+import AppNav from "./components/Nav.vue";
 
 export default {
   name: "App",
   components: {
-    Nav,
+    AppNav,
   },
   data() {
     return {
@@ -15,7 +15,7 @@ export default {
 </script>
 
 <template>
-  <Nav />
+  <AppNav />
   <router-view />
 </template>
 
