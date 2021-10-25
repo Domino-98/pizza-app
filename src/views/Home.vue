@@ -1,58 +1,42 @@
 <template>
-  <div
-    class="
-      bg-header-img bg-no-repeat bg-cover
-      hero
-      bg-opacity-40
-      relative
-      h-screen
-      flex
-      items-center
-      justify-center
-      bg-blend-lighten
-    "
-  >
-    <div
-      class="
-        bg-blend-overlay
-        absolute
-        top-0
-        bottom-0
-        w-full
-        h-full
-        bg-black
-        opacity-50
-      "
-    ></div>
-    <header class="absolute">
-      <h1 class="text-4xl uppercase mb-12 bold tracking-wider text-white">
-        Najlepsza pizza w mieście
-      </h1>
-      <button
+  <main class="container mx-auto mt-8">
+    <div class="flex items-center">
+      <img
+        src="../assets/img/home-img.jpg"
+        class="home-img w-1/2"
+        alt="Pizza z pieca"
+      />
+      <div
         class="
-          uppercase
-          border-4 border-orange-500
-          text-white text-3xl
-          px-5
-          py-3
-          rounded-xl
-          bg-orange-500
-          hover:bg-orange-400 hover:border-orange-400
-          transition
+          bg-white
+          home-text
+          self-stretch
+          flex flex-col
+          items-center
+          justify-center
+          px-8
         "
       >
-        Sprawdź menu / Zamów online
-      </button>
-    </header>
-  </div>
-  <h1 class="text-4xl mt-14 uppercase">Najczęściej zamawiane</h1>
-  <div class="flex justify-center items-center mt-10 mb-10 items-stretch">
-    <app-product-item
-      v-for="product in products"
-      :key="product.id"
-      :product="product"
-    ></app-product-item>
-  </div>
+        <h2 class="text-4xl uppercase font-dancing-script mb-5">
+          Pizza prosto z pieca!
+        </h2>
+        <p class="text-lg">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque laborum
+          quisquam harum unde autem ab porro doloribus vel odio. Laborum
+          nesciunt commodi, asperiores assumenda incidunt necessitatibus
+          dignissimos reiciendis aspernatur quas.
+        </p>
+      </div>
+    </div>
+    <h1 class="text-4xl mt-20 uppercase">Najczęściej zamawiane</h1>
+    <div class="flex justify-center mt-10 mb-10 items-stretch">
+      <app-product-item
+        v-for="product in products"
+        :key="product.id"
+        :product="product"
+      ></app-product-item>
+    </div>
+  </main>
 </template>
 
 <script>
@@ -108,4 +92,11 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.home-img {
+  clip-path: polygon(0 0, 100% 15%, 100% 100%, 0 85%);
+}
+.home-text {
+  clip-path: polygon(0 15%, 100% 0, 100% 85%, 0% 100%);
+}
+</style>

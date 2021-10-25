@@ -17,7 +17,7 @@
       :src="'/src/assets/img/' + product.img"
     />
     <h2 class="text-2xl py-2">{{ product.name }}</h2>
-    <p class="text-xs">
+    <p class="text-xs px-1">
       <span v-for="topping in product.toppings" :key="topping"
         >{{ topping }},
       </span>
@@ -39,12 +39,12 @@
       @click="openSelection(product)"
     >
       Dodaj do koszyka
-      <fa v-if="product.selectWindow" icon="caret-up" class="text-xl" />
-      <fa v-else icon="caret-down" class="text-xl" />
+      <fa v-if="product.selectWindow" icon="caret-down" class="text-xl" />
+      <fa v-else icon="caret-up" class="text-xl" />
     </button>
     <div
       v-if="product.selectWindow"
-      class="absolute -bottom-32 bg-white w-full shadow-xl"
+      class="absolute bottom-16 bg-white w-full shadow-xl"
     >
       <ul class="w-full">
         <li>

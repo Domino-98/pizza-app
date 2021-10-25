@@ -18,7 +18,26 @@ module.exports = {
       black: colors.black,
     },
     backgroundImage: {
-      "header-img": "url('/src/assets/img/home-img.jpg')",
+      "header-img": "url('/src/assets/img/header-img.jpg')",
+    },
+    fontFamily: {
+      "dancing-script": ["Dancing Script", "Arial", "sans-serif"],
+    },
+    screens: {
+      sm: "640px",
+      // => @media (min-width: 640px) { ... }
+
+      md: "768px",
+      // => @media (min-width: 768px) { ... }
+
+      lg: "1024px",
+      // => @media (min-width: 1024px) { ... }
+
+      xl: "1280px",
+      // => @media (min-width: 1280px) { ... }
+
+      "2xl": "1550px",
+      // => @media (min-width: 1550px) { ... }
     },
   },
   variants: {
