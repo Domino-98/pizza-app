@@ -14,42 +14,50 @@
     "
   >
     <h1 class="ml-10 text-4xl font-dancing-script">
-      <a href="/">Pizza App</a>
+      <a href="#" class="cursor-pointer">Pizza App</a>
     </h1>
     <ul class="flex items-center tracking-wide">
-      <li class="mr-5 border-b-2 border-orange-500">
-        <a class="cursor-pointer hover:text-orange-500 transition" href="/"
-          >Strona główna</a
+      <li class="mr-5">
+        <router-link
+          class="cursor-pointer pb-1 hover:text-orange-500 transition"
+          to="/"
+          >Strona główna</router-link
+        >
+      </li>
+      <li class="mr-5" active-class="border-b-2 border-orange-500">
+        <router-link
+          class="cursor-pointer pb-1 hover:text-orange-500 transition"
+          to="/menu"
+          >Menu</router-link
         >
       </li>
       <li class="mr-5">
-        <a class="cursor-pointer hover:text-orange-500 transition" href="menu"
-          >Menu</a
+        <router-link
+          class="cursor-pointer pb-1 hover:text-orange-500 transition"
+          :to="{
+            path: 'about',
+            hash: '#about',
+          }"
+          >O nas</router-link
         >
       </li>
       <li class="mr-5">
-        <a class="cursor-pointer hover:text-orange-500 transition" href="about"
-          >O nas</a
+        <router-link
+          class="cursor-pointer pb-1 hover:text-orange-500 transition"
+          to="/contact"
+          >Kontakt</router-link
         >
       </li>
       <li class="mr-5">
-        <a
-          class="cursor-pointer hover:text-orange-500 transition"
-          href="contact"
-          >Kontakt</a
-        >
-      </li>
-      <li class="mr-5">
-        <a
-          class="cursor-pointer hover:text-orange-500 transition"
-          href="account"
+        <a class="cursor-pointer hover:text-orange-500 transition" href="#"
           >Konto</a
         >
       </li>
       <li class="mr-10">
-        <a
+        <router-link
+          active-class="text-orange-500"
           class="relative cursor-pointer hover:text-orange-500 transition"
-          href="basket"
+          to="/cart"
           ><fa icon="shopping-cart" class="text-2xl" />
           <div
             class="
@@ -68,7 +76,7 @@
             "
           >
             1
-          </div></a
+          </div></router-link
         >
       </li>
     </ul>
