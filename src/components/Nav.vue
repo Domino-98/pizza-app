@@ -44,7 +44,10 @@
       <li class="mr-5">
         <router-link
           class="cursor-pointer pb-1 hover:text-orange-500 transition"
-          to="/contact"
+          :to="{
+            path: 'contact',
+            hash: '#contact',
+          }"
           >Kontakt</router-link
         >
       </li>
