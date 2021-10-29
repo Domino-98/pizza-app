@@ -27,7 +27,10 @@
       <li class="mr-5" active-class="border-b-2 border-orange-500">
         <router-link
           class="cursor-pointer pb-1 hover:text-orange-500 transition"
-          to="/menu"
+          :to="{
+            path: 'menu',
+            hash: '#menu',
+          }"
           >Menu</router-link
         >
       </li>

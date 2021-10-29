@@ -29,7 +29,7 @@
       <h1 class="text-4xl uppercase mb-12 bold tracking-wider text-white">
         Najlepsza pizza w mieście
       </h1>
-      <button
+      <router-link
         class="
           uppercase
           border-4 border-orange-500
@@ -41,9 +41,13 @@
           hover:bg-orange-400 hover:border-orange-400
           transition
         "
+        :to="{
+          path: 'menu',
+          hash: '#menu',
+        }"
       >
         Sprawdź menu / Zamów online
-      </button>
+      </router-link>
     </header>
   </div>
 </template>
