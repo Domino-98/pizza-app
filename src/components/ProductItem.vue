@@ -4,25 +4,29 @@
       relative
       flex flex-col
       mx-5
-      w-1/5
+      w-1/4
       bg-white
       pb-5
       rounded-md
       justify-between
+      my-3
     "
   >
     <img
-      alt=""
+      alt="Pizza product"
       class="object-cover h-64 rounded-t-md"
       :src="'/src/assets/img/' + product.img"
     />
     <h2 class="text-2xl py-2">{{ product.name }}</h2>
     <p class="text-xs px-1">
-      <span v-for="topping in product.toppings" :key="topping"
-        >{{ topping }},
+      <span v-for="(topping, i) in product.toppings" :key="topping"
+        >{{ topping
+        }}<!-- eslint-disable-next-line vue/no-parsing-error -->{{
+          i < product.toppings.length - 1 ? ", " : ""
+        }}
       </span>
     </p>
-    <p class="mt-2 text-lg">{{ product.price }} zł</p>
+    <p class="mt-2 text-lg">{{ product.priceS }} zł</p>
     <button
       class="
         mt-2
@@ -36,7 +40,7 @@
         hover:bg-orange-500 hover:text-white
         transition
       "
-      @click="openSelection(product)"
+      @click="toggleSelection(product)"
     >
       Dodaj do koszyka
       <fa v-if="product.selectWindow" icon="caret-down" class="text-xl" />
@@ -49,7 +53,6 @@
       <ul class="w-full">
         <li>
           <a
-            href="#"
             class="
               flex
               justify-between
@@ -57,14 +60,15 @@
               px-4
               hover:bg-orange-300
               transition
+              cursor-pointer
             "
+            @click="addToCart(product, product.priceS)"
           >
-            25cm <span>{{ product.price }}zł</span>
+            25cm <span>{{ product.priceS }}zł</span>
           </a>
         </li>
         <li>
           <a
-            href="#"
             class="
               flex
               justify-between
@@ -72,14 +76,15 @@
               px-4
               hover:bg-orange-300
               transition
+              cursor-pointer
             "
+            @click="addToCart(product, product.priceM)"
           >
-            32cm <span>{{ product.priceMd }}zł</span>
+            32cm <span>{{ product.priceM }}zł</span>
           </a>
         </li>
         <li>
           <a
-            href="#"
             class="
               flex
               justify-between
@@ -87,9 +92,11 @@
               px-4
               hover:bg-orange-300
               transition
+              cursor-pointer
             "
+            @click="addToCart(product, product.priceL)"
           >
-            45cm <span>{{ product.priceLg }}zł</span>
+            45cm <span>{{ product.priceL }}zł</span>
           </a>
         </li>
       </ul>
@@ -98,17 +105,54 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
+
 export default {
   name: "ProductList",
   // eslint-disable-next-line vue/require-prop-types
   props: ["product"],
+  emits: ["openModal"],
   data() {
-    return {};
+    return {
+      pizza: {
+        name: null,
+        img: null,
+        size: null,
+        price: null,
+        amount: 1,
+        toppings: [],
+      },
+    };
   },
   methods: {
-    openSelection(product) {
+    toggleSelection(product) {
       product.selectWindow = !product.selectWindow;
     },
+    addToCart(product, price) {
+      if (product.priceS === price) {
+        this.pizza.size = "S";
+      } else if (product.priceM === price) {
+        this.pizza.size = "M";
+      } else {
+        this.pizza.size = "L";
+      }
+      this.pizza.name = product.name;
+      this.pizza.img = product.img;
+      this.pizza.price = price;
+      this.pizza.toppings = product.toppings;
+      this.toggleSelection(product);
+
+      console.log(this.pizza);
+      // Save pizza in Vuex
+      this.addProduct(this.pizza);
+      this.openModal();
+    },
+    openModal() {
+      this.$emit("openModal", true, this.pizza);
+    },
+    ...mapMutations({
+      addProduct: "addProduct",
+    }),
   },
 };
 </script>

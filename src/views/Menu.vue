@@ -8,25 +8,36 @@
         v-for="product in products"
         :key="product.id"
         :product="product"
+        @open-modal="openModal"
       ></app-product-item>
     </section>
-
-    <AppPizzaMaker />
+    <AppPizzaMaker @open-modal="openModal" />
   </main>
+  <transition name="modal-fade">
+    <AddProductModal
+      v-if="showModal"
+      :pizza="pizza"
+      @close-modal="closeModal"
+    />
+  </transition>
 </template>
 
 <script>
 import AppProductItem from "../components/ProductItem.vue";
 import AppPizzaMaker from "../components/PizzaMaker.vue";
+import AddProductModal from "../components/AddProductModal.vue";
 
 export default {
   name: "Menu",
   components: {
     AppProductItem,
     AppPizzaMaker,
+    AddProductModal,
   },
   data() {
     return {
+      showModal: false,
+      pizza: {},
       products: [
         {
           id: 1,
@@ -118,7 +129,26 @@ export default {
       ],
     };
   },
+  methods: {
+    openModal(openModal, pizza) {
+      this.showModal = openModal;
+      this.pizza = pizza;
+    },
+    closeModal(closeModal) {
+      this.showModal = closeModal;
+    },
+  },
 };
 </script>
 
-<style></style>
+<style>
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+  opacity: 0;
+}
+
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+</style>

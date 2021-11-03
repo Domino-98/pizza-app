@@ -14,7 +14,6 @@
           type="radio"
           name="size"
           class="mr-1 h-4 w-4 hidden"
-          checked
           @change="updateTotalPrice('S')"
         />
 
@@ -104,7 +103,7 @@
               name="ingredients"
               :value="topping.name"
               class="form-checkbox h-5 w-5 text-orange-400 rounded-md"
-              checked
+              WW
               @change="updatePriceArray($event, topping.price)"
             /><span class="ml-2 text-gray-700">{{ topping.name }}</span>
           </label>
@@ -127,7 +126,6 @@
               name="ingredients"
               :value="topping.name"
               class="form-checkbox h-5 w-5 text-orange-400 rounded-md"
-              checked
               @change="updatePriceArray($event, topping.price)"
             /><span class="ml-2 text-gray-700">{{ topping.name }}</span>
           </label>
@@ -150,7 +148,6 @@
               name="ingredients"
               :value="topping.name"
               class="form-checkbox h-5 w-5 text-orange-400 rounded-md"
-              checked
               @change="updatePriceArray($event, topping.price)"
             />
             <span class="ml-2 text-gray-700">{{ topping.name }}</span>
@@ -262,8 +259,11 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
+
 export default {
   name: "PizzaMaker",
+  emits: ["openModal"],
   data() {
     return {
       pizzaPrice: 0,
@@ -271,6 +271,7 @@ export default {
       priceArray: [],
       pizza: {
         name: "Własna",
+        img: "pizza.jpg",
         size: "S",
         price: 18,
         amount: 1,
@@ -336,6 +337,9 @@ export default {
       ],
     };
   },
+  mounted() {
+    this.updateTotalPrice();
+  },
   methods: {
     updateTotalPrice() {
       if (this.pizza.size === "S") {
@@ -373,6 +377,11 @@ export default {
       this.pizza.price = this.totalPrice;
       console.log(this.pizza);
       // Save pizza in Vuex
+      this.addProduct(this.pizza);
+      this.openModal();
+    },
+    openModal() {
+      this.$emit("openModal", true, this.pizza);
     },
     decrement() {
       this.pizza.amount > 1 ? this.pizza.amount-- : false;
@@ -382,11 +391,14 @@ export default {
       this.pizza.amount < 6 ? this.pizza.amount++ : false;
       this.totalPrice = this.pizzaPrice * this.pizza.amount;
     },
+    ...mapMutations({
+      addProduct: "addProduct",
+    }),
   },
 };
 </script>
 
-<style scoped>
+<style>
 input[type="radio"] + label span {
   transition: background 0.2s, transform 0.2s;
 }

@@ -1,6 +1,6 @@
 <template>
   <main class="container mx-auto mt-8">
-    <div class="flex items-center">
+    <section class="flex items-center">
       <img
         src="../assets/img/home-img.jpg"
         class="home-img w-1/2"
@@ -27,32 +27,44 @@
           dignissimos reiciendis aspernatur quas.
         </p>
       </div>
-    </div>
+    </section>
     <h1 class="text-4xl mt-20 uppercase">Najczęściej zamawiane</h1>
-    <div class="flex justify-center mt-10 mb-10 items-stretch">
+    <section class="flex justify-center mt-10 items-stretch">
       <app-product-item
         v-for="product in products"
         :key="product.id"
         :product="product"
+        @open-modal="openModal"
       ></app-product-item>
-    </div>
+    </section>
   </main>
+  <transition name="modal-fade">
+    <AddProductModal
+      v-if="showModal"
+      :pizza="pizza"
+      @close-modal="closeModal"
+    />
+  </transition>
 </template>
 
 <script>
 import AppProductItem from "../components/ProductItem.vue";
+import AddProductModal from "../components/AddProductModal.vue";
 
 export default {
   name: "Home",
   components: {
     AppProductItem,
+    AddProductModal,
   },
   data() {
     return {
+      showModal: false,
+      pizza: {},
       products: [
         {
           id: 1,
-          img: "capricciosa.jpg",
+          img: "pizza-capricciosa.jpg",
           name: "Capricciosa",
           toppings: [
             "Sos pomidorowy",
@@ -61,33 +73,42 @@ export default {
             "Pieczarki",
             "Karczochy",
           ],
-          price: 28,
-          priceMd: 34,
-          priceLg: 40,
+          priceS: 28,
+          priceM: 34,
+          priceL: 40,
           selectWindow: false,
         },
         {
           id: 2,
-          img: "margherita.jpg",
+          img: "pizza-margherita.jpg",
           name: "Margherita",
           toppings: ["Sos pomidorowy", "Mozarella", "Oliwa"],
-          price: 20,
-          priceMd: 26,
-          priceLg: 32,
+          priceS: 20,
+          priceM: 26,
+          priceL: 32,
           selectWindow: false,
         },
         {
           id: 3,
-          img: "neapolitan.jpg",
+          img: "pizza-neapolitan.jpg",
           name: "Neapolitańska",
           toppings: ["Sos pomidorowy", "Mozarella", "Pomidory", "Bazylia"],
-          price: 26,
-          priceMd: 32,
-          priceLg: 38,
+          priceS: 26,
+          priceM: 32,
+          priceL: 38,
           selectWindow: false,
         },
       ],
     };
+  },
+  methods: {
+    openModal(openModal, pizza) {
+      this.showModal = openModal;
+      this.pizza = pizza;
+    },
+    closeModal(closeModal) {
+      this.showModal = closeModal;
+    },
   },
 };
 </script>
