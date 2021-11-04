@@ -19,6 +19,7 @@
     <ul class="flex items-center tracking-wide">
       <li class="mr-5">
         <router-link
+          active-class="border-b-2 border-orange-500"
           class="cursor-pointer pb-1 hover:text-orange-500 transition"
           to="/"
           >Strona główna</router-link
@@ -26,6 +27,7 @@
       </li>
       <li class="mr-5" active-class="border-b-2 border-orange-500">
         <router-link
+          active-class="border-b-2 border-orange-500"
           class="cursor-pointer pb-1 hover:text-orange-500 transition"
           :to="{
             path: 'menu',
@@ -36,6 +38,7 @@
       </li>
       <li class="mr-5">
         <router-link
+          active-class="border-b-2 border-orange-500"
           class="cursor-pointer pb-1 hover:text-orange-500 transition"
           :to="{
             path: 'about',
@@ -46,6 +49,7 @@
       </li>
       <li class="mr-5">
         <router-link
+          active-class="border-b-2 border-orange-500"
           class="cursor-pointer pb-1 hover:text-orange-500 transition"
           :to="{
             path: 'contact',
@@ -63,7 +67,10 @@
         <router-link
           active-class="text-orange-500"
           class="relative cursor-pointer hover:text-orange-500 transition"
-          to="/cart"
+          :to="{
+            path: 'cart',
+            hash: '#cart',
+          }"
           ><fa icon="shopping-cart" class="text-2xl" />
           <div
             class="
@@ -81,7 +88,7 @@
               justify-center
             "
           >
-            1
+            {{ getProductsAmount }}
           </div></router-link
         >
       </li>
@@ -90,8 +97,13 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "Nav",
+  computed: {
+    ...mapGetters(["getProductsAmount"]),
+  },
 };
 </script>
 
