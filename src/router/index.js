@@ -3,6 +3,7 @@ import Home from "/src/views/Home.vue";
 import About from "/src/views/About.vue";
 import Contact from "/src/views/Contact.vue";
 import Menu from "/src/views/Menu.vue";
+import Cart from "/src/views/Cart.vue";
 
 const routes = [
   {
@@ -25,6 +26,11 @@ const routes = [
     name: "menu",
     component: Menu,
   },
+  {
+    path: "/cart",
+    name: "cart",
+    component: Cart,
+  },
 ];
 
 const router = createRouter({
@@ -39,7 +45,6 @@ const router = createRouter({
       };
     }
   },
-  linkExactActiveClass: "border-b-2 border-orange-500",
 });
 
 export default router;
