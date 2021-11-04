@@ -28,7 +28,7 @@
             </ul>
 
             <p><span class="font-bold">Rozmiar: </span>{{ pizza.size }}</p>
-            <p class="text-xl">{{ pizza.price }}zł</p>
+            <p class="text-xl">{{ pizza.price * pizza.amount }}zł</p>
             <p>x{{ pizza.amount }}</p>
           </div>
         </div>
@@ -98,5 +98,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

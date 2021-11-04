@@ -1,11 +1,11 @@
 <template>
   <footer class="w-full bg-gray-700 text-white px-20 pt-16 pb-12 mt-20">
     <div class="flex justify-between items-center">
-      <div class="flex-auto">
+      <div class="flex-1">
         <h1 class="text-4xl font-dancing-script">PIZZA APP</h1>
         <p class="mt-5">Copyright &copy; by Dominik Buczek</p>
       </div>
-      <div class="flex-auto">
+      <div class="flex-1">
         <h2 class="text-xl mb-3 uppercase">Kontakt</h2>
         <ul>
           <li>Rzeszów, ul. słoneczna 5</li>
@@ -29,7 +29,7 @@
           </li>
         </ul>
       </div>
-      <div class="flex-auto">
+      <div class="flex-1">
         <form action="" class="flex flex-col items-center">
           <label for="newsletter" class="text-lg uppercase"
             >Subskrybuj nasz newsletter</label
@@ -67,5 +67,3 @@ export default {
   name: "Footer",
 };
 </script>
-
-<style></style>

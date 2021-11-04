@@ -136,13 +136,12 @@ export default {
       } else {
         this.pizza.size = "L";
       }
+      this.pizza.id = product.id;
       this.pizza.name = product.name;
       this.pizza.img = product.img;
       this.pizza.price = price;
       this.pizza.toppings = product.toppings;
       this.toggleSelection(product);
-
-      console.log(this.pizza);
       // Save pizza in Vuex
       this.addProduct(this.pizza);
       this.openModal();
@@ -156,5 +155,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

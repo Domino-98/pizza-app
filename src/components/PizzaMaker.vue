@@ -283,12 +283,16 @@ export default {
           price: 3,
         },
         {
-          name: "Szynka",
+          name: "Tuńczyk",
           price: 3,
         },
         {
-          name: "Tuńczyk",
-          price: 3,
+          name: "Szynka",
+          price: 2.5,
+        },
+        {
+          name: "Ananas",
+          price: 2,
         },
         {
           name: "Pomidory",
@@ -306,8 +310,9 @@ export default {
           name: "Karczochy",
           price: 1.5,
         },
+
         {
-          name: "Ananas",
+          name: "Kukurydza",
           price: 1.5,
         },
         {
@@ -374,8 +379,7 @@ export default {
       this.updateTotalPrice();
     },
     addToCart() {
-      this.pizza.price = this.totalPrice;
-      console.log(this.pizza);
+      this.pizza.price = this.totalPrice / this.pizza.amount;
       // Save pizza in Vuex
       this.addProduct(this.pizza);
       this.openModal();

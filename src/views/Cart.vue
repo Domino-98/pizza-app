@@ -80,6 +80,7 @@
                   text-gray-700
                   hover:text-red-600
                 "
+                title="Usuń produkt"
                 @click="removeProduct(product)"
               >
                 &#10006;
@@ -240,5 +241,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

@@ -63,5 +63,3 @@ export default {
   name: "About",
 };
 </script>
-
-<style></style>
