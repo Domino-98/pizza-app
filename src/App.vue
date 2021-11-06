@@ -1,12 +1,14 @@
 <script>
 import AppHeader from "./components/Header.vue";
 import AppFooter from "./components/Footer.vue";
+import AuthModal from "./components/AuthModal.vue";
 
 export default {
   name: "App",
   components: {
     AppHeader,
     AppFooter,
+    AuthModal,
   },
   data() {
     return {
@@ -20,6 +22,7 @@ export default {
   <AppHeader />
   <router-view />
   <AppFooter />
+  <AuthModal />
 </template>
 
 <style>

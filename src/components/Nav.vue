@@ -59,7 +59,10 @@
         >
       </li>
       <li class="mr-5">
-        <a class="cursor-pointer hover:text-orange-500 transition" href="#"
+        <a
+          class="cursor-pointer hover:text-orange-500 transition"
+          href="#"
+          @click.prevent="toggleAuthModal"
           >Konto</a
         >
       </li>
@@ -97,12 +100,15 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   name: "Nav",
   computed: {
     ...mapGetters(["getProductsAmount"]),
+  },
+  methods: {
+    ...mapMutations(["toggleAuthModal"]),
   },
 };
 </script>
