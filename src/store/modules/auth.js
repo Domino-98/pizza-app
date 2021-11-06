@@ -1,8 +1,12 @@
 export default {
   state: {
-    name: "Dominik",
+    authModalShow: false,
   },
   getters: {},
-  mutations: {},
+  mutations: {
+    toggleAuthModal(state) {
+      state.authModalShow = !state.authModalShow;
+    },
+  },
   actions: {},
 };
