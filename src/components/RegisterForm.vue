@@ -1,8 +1,16 @@
 <template>
-  <form class="mt-14 flex flex-col w-60" @submit.prevent>
+  <form class="mt-14 flex flex-col w-72" @submit.prevent="submitForm">
+    <div
+      v-if="regShowAlert"
+      :class="regAlertVariant"
+      class="bg-green-500 text-white py-3 w-full mb-5"
+    >
+      <h5 class="text-l">{{ regAlertMsg }}</h5>
+    </div>
     <div class="relative flex flex-col place-items-start mb-5">
       <input
         id="name"
+        v-model="name"
         type="text"
         name="name"
         class="
@@ -35,10 +43,14 @@
         "
         >Nazwa</label
       >
+      <span v-if="v$.name.$error" class="text-sm text-red-500 mt-1 text-left">
+        {{ v$.name.$errors[0].$message }}
+      </span>
     </div>
     <div class="relative flex flex-col place-items-start mb-5">
       <input
         id="email"
+        v-model="email"
         type="email"
         name="email"
         class="
@@ -71,10 +83,14 @@
         "
         >Email</label
       >
+      <span v-if="v$.email.$error" class="text-sm text-red-500 mt-1 text-left">
+        {{ v$.email.$errors[0].$message }}
+      </span>
     </div>
     <div class="relative flex flex-col place-items-start mb-5">
       <input
         id="password"
+        v-model="password.password"
         type="password"
         name="password"
         class="
@@ -107,10 +123,17 @@
         "
         >Hasło</label
       >
+      <span
+        v-if="v$.password.password.$error"
+        class="text-sm text-red-500 mt-1 text-left"
+      >
+        {{ v$.password.password.$errors[0].$message }}
+      </span>
     </div>
     <div class="relative flex flex-col place-items-start mb-5">
       <input
         id="confirm_password"
+        v-model="password.confirm"
         type="password"
         name="confirm_password"
         class="
@@ -143,10 +166,17 @@
         "
         >Potwierdź hasło</label
       >
+      <span
+        v-if="v$.password.confirm.$error"
+        class="text-sm text-red-500 mt-1 text-left"
+      >
+        {{ v$.password.confirm.$errors[0].$message }}
+      </span>
     </div>
     <div class="relative flex flex-col place-items-start mb-5">
       <input
         id="phone"
+        v-model="phone"
         type="number"
         name="phone"
         class="
@@ -179,10 +209,14 @@
         "
         >Numer telefonu</label
       >
+      <span v-if="v$.phone.$error" class="text-sm text-red-500 mt-1 text-left">
+        {{ v$.phone.$errors[0].$message }}
+      </span>
     </div>
     <div class="mb-3">
       <input
         id="tos"
+        v-model="tos"
         type="checkbox"
         name="tos"
         class="mb-0.5 mr-1 form-checkbox h-4 w-4 text-orange-400 rounded-md"
@@ -192,6 +226,9 @@
         <a href="#" class="text-orange-500">Warunkami użytkowania</a> i
         <a href="#" class="text-orange-500">Polityką prywatności</a></label
       >
+      <p v-if="v$.tos.$error" class="text-sm text-red-500 mt-1 text-left">
+        Musisz zaakceptować warunki użytkowania i politykę prywatności
+      </p>
     </div>
     <button
       class="
@@ -210,7 +247,125 @@
 </template>
 
 <script>
+import useValidate from "@vuelidate/core";
+import {
+  required,
+  email,
+  minLength,
+  maxLength,
+  sameAs,
+  helpers,
+} from "@vuelidate/validators";
+import {
+  hasNumber,
+  hasLowerCaseLetter,
+  hasCapitalCaseLetter,
+  hasSpecialCharacter,
+} from "../validators/password";
+
 export default {
   name: "RegisterForm",
+  data() {
+    return {
+      v$: useValidate(),
+      name: "",
+      email: "",
+      password: {
+        password: "",
+        confirm: "",
+      },
+      phone: "",
+      tos: false,
+      regInSubmission: false,
+      regShowAlert: false,
+      regAlertVariant: "bg-green-500",
+      regAlertMsg: "Pomyślnie zarejestrowano!",
+    };
+  },
+  validations() {
+    return {
+      name: {
+        required: helpers.withMessage("Nazwa nie może być pusta", required),
+        minLength: helpers.withMessage(
+          "Nazwa musi zawierać minimum 3 znaki",
+          minLength(3)
+        ),
+        maxLength: helpers.withMessage(
+          "Nazwa może zawierać maksimum 15 znaków",
+          maxLength(15)
+        ),
+      },
+      email: {
+        required: helpers.withMessage("Email jest wymagany", required),
+        email: helpers.withMessage("Nieprawidłowy adres email", email),
+      },
+      password: {
+        password: {
+          required: helpers.withMessage("Hasło jest wymagane", required),
+          minLength: helpers.withMessage(
+            "Hasło musi zawierać minimum 6 znaków",
+            minLength(6)
+          ),
+          hasNumber: helpers.withMessage(
+            "Hasło musi zawierać cyfrę",
+            hasNumber
+          ),
+          hasLowerCaseLetter: helpers.withMessage(
+            "Hasło musi zawierać conajmniej jedną małą literę",
+            hasLowerCaseLetter
+          ),
+          hasCapitalCaseLetter: helpers.withMessage(
+            "Hasło musi zawierać conajmniej jedną wielką literę",
+            hasCapitalCaseLetter
+          ),
+          hasSpecialCharacter: helpers.withMessage(
+            "Hasło musi zawierać conajmniej jeden znak specjalny",
+            hasSpecialCharacter
+          ),
+        },
+        confirm: {
+          required: helpers.withMessage(
+            "Potwierdzenie hasła jest wymagane",
+            required
+          ),
+          sameAs: helpers.withMessage(
+            "Oba hasła muszą być takie same",
+            sameAs(this.password.password)
+          ),
+        },
+      },
+      phone: {
+        required: helpers.withMessage("Numer telefonu jest wymagany", required),
+      },
+      tos: {
+        checked(val) {
+          return val;
+        },
+      },
+    };
+  },
+  methods: {
+    submitForm() {
+      this.v$.$validate();
+      this.regInSubmission = true;
+      if (!this.v$.$error) {
+        this.regShowAlert = true;
+        this.regAlertVariant = "bg-green-500";
+        this.regAlertMsg = "Pomyślnie zarejestrowano!";
+        let user = {
+          name: this.name,
+          email: this.email,
+          password: this.password.password,
+          phone: this.phone,
+        };
+        console.log(user);
+        // Dispatch action to register user
+      } else {
+        this.regShowAlert = true;
+        this.regAlertVariant = "bg-red-500";
+        this.regAlertMsg = "Wprowadź poprawne dane!";
+      }
+    },
+  },
 };
 </script>
