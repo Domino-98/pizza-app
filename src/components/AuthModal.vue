@@ -3,16 +3,18 @@
     <div
       v-show="authModalShow"
       class="
+        z-10
         fixed
         inset-0
         bg-black bg-opacity-50
         flex
         justify-center
         items-center
+        overflow-y-scroll
       "
       @click.self="toggleAuthModal"
     >
-      <div class="relative bg-white shadow-xl px-12 pb-6 rounded-md mt-10">
+      <div class="relative bg-white px-12 pb-6 rounded-md mt-10">
         <button
           class="
             absolute
@@ -36,8 +38,8 @@
             right-0
             -top-8
             mx-auto
-            w-72
-            shadow-xl
+            w-80
+            shadow-lg
             rounded-md
             overflow-hidden
           "
@@ -54,7 +56,13 @@
             "
             :class="{ 'bg-orange-200 text-black': tab === 'login' }"
             @click.prevent="showForm('login')"
-            >Logowanie</a
+          >
+            <fa
+              class="mr-1"
+              :icon="['fa', 'user']"
+              :class="{ 'text-black': tab === 'login' }"
+            />
+            Logowanie</a
           >
           <a
             href="#"
@@ -68,7 +76,12 @@
             "
             :class="{ 'bg-orange-200 text-black': tab === 'register' }"
             @click.prevent="showForm('register')"
-            >Rejestracja</a
+          >
+            <fa
+              class="mr-1"
+              :icon="['fa', 'user-plus']"
+              :class="{ 'text-black': tab === 'register' }"
+            />Rejestracja</a
           >
         </div>
         <!-- Login Form -->

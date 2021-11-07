@@ -8,6 +8,7 @@
       justify-center
       items-center
     "
+    @click.self="closeModal"
   >
     <div class="bg-white rounded-lg">
       <div class="w-96 border-t-8 rounded-lg">

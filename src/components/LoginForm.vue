@@ -1,5 +1,5 @@
 <template>
-  <form class="mt-14 flex flex-col w-60" @submit.prevent>
+  <form class="mt-14 flex flex-col w-72" @submit.prevent>
     <div class="relative flex flex-col place-items-start mb-5">
       <input
         id="email"

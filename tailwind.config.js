@@ -15,6 +15,7 @@ module.exports = {
       blue: colors.sky,
       yellow: colors.amber,
       orange: colors.orange,
+      green: colors.green,
       white: colors.white,
       black: colors.black,
     },
