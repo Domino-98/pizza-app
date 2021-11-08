@@ -15,6 +15,7 @@
           items-center
           justify-center
           px-8
+          flex-1
         "
       >
         <h2 class="text-4xl uppercase font-dancing-script mb-5">

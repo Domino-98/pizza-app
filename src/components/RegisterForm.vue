@@ -345,13 +345,14 @@ export default {
     };
   },
   methods: {
+    // Async function
     submitForm() {
       this.v$.$validate();
       this.regInSubmission = true;
+      this.regShowAlert = true;
+      this.regAlertVariant = "bg-blue-500";
+      this.regAlertMsg = "Proszę czekać. Trwa tworzenie konta.";
       if (!this.v$.$error) {
-        this.regShowAlert = true;
-        this.regAlertVariant = "bg-green-500";
-        this.regAlertMsg = "Pomyślnie zarejestrowano!";
         let user = {
           name: this.name,
           email: this.email,
@@ -359,11 +360,14 @@ export default {
           phone: this.phone,
         };
         console.log(user);
-        // Dispatch action to register user
+        // Try/catch, dispatch action to register user
+        this.regAlertVariant = "bg-green-500";
+        this.regAlertMsg = "Pomyślnie zarejestrowano!";
+        window.location.reload();
       } else {
-        this.regShowAlert = true;
         this.regAlertVariant = "bg-red-500";
         this.regAlertMsg = "Wprowadź poprawne dane!";
+        this.regInSubmission = false;
       }
     },
   },
