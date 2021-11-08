@@ -1,8 +1,16 @@
 <template>
-  <form class="mt-14 flex flex-col w-72" @submit.prevent>
+  <form class="mt-14 flex flex-col w-72" @submit.prevent="submitForm">
+    <div
+      v-if="loginShowAlert"
+      :class="loginAlertVariant"
+      class="bg-green-500 text-white py-3 w-full mb-5"
+    >
+      <h5 class="text-l">{{ loginAlertMsg }}</h5>
+    </div>
     <div class="relative flex flex-col place-items-start mb-5">
       <input
         id="email"
+        v-model="email"
         type="email"
         name="email"
         class="
@@ -35,10 +43,14 @@
         "
         >Email</label
       >
+      <span v-if="v$.email.$error" class="text-sm text-red-500 mt-1 text-left">
+        {{ v$.email.$errors[0].$message }}
+      </span>
     </div>
     <div class="relative flex flex-col place-items-start mb-5">
       <input
         id="password"
+        v-model="password"
         type="password"
         name="password"
         class="
@@ -71,6 +83,12 @@
         "
         >Hasło</label
       >
+      <span
+        v-if="v$.password.$error"
+        class="text-sm text-red-500 mt-1 text-left"
+      >
+        {{ v$.password.$errors[0].$message }}
+      </span>
     </div>
     <button
       class="
@@ -90,7 +108,57 @@
 </template>
 
 <script>
+import useValidate from "@vuelidate/core";
+import { required, email, helpers } from "@vuelidate/validators";
+
 export default {
   name: "LoginForm",
+  data() {
+    return {
+      v$: useValidate(),
+      email: "",
+      password: "",
+      loginInSubmission: false,
+      loginShowAlert: false,
+      loginAlertVariant: "bg-green-500",
+      loginAlertMsg: "Pomyślnie zalogowano!",
+    };
+  },
+  validations() {
+    return {
+      email: {
+        required: helpers.withMessage("Email jest wymagany", required),
+        email: helpers.withMessage("Nieprawidłowy adres email", email),
+      },
+      password: {
+        required: helpers.withMessage("Hasło jest wymagane", required),
+      },
+    };
+  },
+  methods: {
+    // Async function
+    submitForm() {
+      this.v$.$validate();
+      this.loginInSubmission = true;
+      this.loginShowAlert = true;
+      this.loginAlertVariant = "bg-blue-500";
+      this.loginAlertMsg = "Proszę czekać. Trwa logowanie.";
+      if (!this.v$.$error) {
+        let user = {
+          email: this.email,
+          password: this.password,
+        };
+        console.log(user);
+        // Try/catch, dispatch action to login user
+        this.loginAlertVariant = "bg-green-500";
+        this.loginAlertMsg = "Pomyślnie zalogowano!";
+        window.location.reload();
+      } else {
+        this.loginAlertVariant = "bg-red-500";
+        this.loginAlertMsg = "Wprowadź poprawne dane!";
+        this.loginInSubmission = false;
+      }
+    },
+  },
 };
 </script>
