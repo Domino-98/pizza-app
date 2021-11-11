@@ -1,16 +1,21 @@
 <template>
-  <main class="container mx-auto mt-8">
-    <section class="flex items-center">
+  <main class="container mx-auto mt-4 md:mt-8">
+    <section class="flex flex-col xs:flex-row items-center mx-5 md:mx-10">
       <img
         src="../assets/img/home-img.jpg"
-        class="home-img w-1/2"
+        class="home-img h-72 xs:h-80 lg:h-96 w-9/12 xs:w-1/2"
         alt="Pizza z pieca"
       />
       <div
         class="
           bg-white
           home-text
-          self-stretch
+          -mt-16
+          xs:mt-0
+          py-20
+          xs:h-auto
+          w-9/12
+          xs:self-stretch
           flex flex-col
           items-center
           justify-center
@@ -18,19 +23,31 @@
           flex-1
         "
       >
-        <h2 class="text-4xl uppercase font-dancing-script mb-5">
+        <h2 class="text-3xl lg:text-4xl uppercase font-dancing-script md:mb-3">
           Pizza prosto z pieca!
         </h2>
-        <p class="text-lg">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque laborum
-          quisquam harum unde autem ab porro doloribus vel odio. Laborum
-          nesciunt commodi, asperiores assumenda incidunt necessitatibus
-          dignissimos reiciendis aspernatur quas.
+        <p class="hidden md:block text-l lg:text-lg">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.<span
+            class="hidden lg:block"
+            >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur,
+            unde.</span
+          >
         </p>
       </div>
     </section>
-    <h1 class="text-4xl mt-20 uppercase">Najczęściej zamawiane</h1>
-    <section class="flex justify-center mt-10 items-stretch">
+    <h1 class="text-2xl md:text-3xl lg:text-4xl mt-10 sm:mt-20 uppercase">
+      Najczęściej zamawiane
+    </h1>
+    <section
+      class="
+        flex flex-col
+        items-center
+        sm:flex-row
+        justify-center
+        mt-5
+        sm:mt-10 sm:items-stretch
+      "
+    >
       <app-product-item
         v-for="product in products"
         :key="product.id"
@@ -116,9 +133,31 @@ export default {
 
 <style>
 .home-img {
-  clip-path: polygon(0 0, 100% 15%, 100% 100%, 0 85%);
+  clip-path: polygon(0 0, 50% 15%, 100% 0, 100% 85%, 50% 100%, 0 85%);
 }
+
+@media (min-width: 500px) {
+  .home-img {
+    clip-path: polygon(0 0, 100% 15%, 100% 100%, 0 85%);
+  }
+}
+@media (min-width: 1024px) {
+  .home-img {
+    clip-path: polygon(0 0, 100% 20%, 100% 100%, 0 80%);
+  }
+}
+
 .home-text {
-  clip-path: polygon(0 15%, 100% 0, 100% 85%, 0% 100%);
+  clip-path: polygon(0 0, 50% 15%, 100% 0, 100% 85%, 50% 100%, 0 85%);
+}
+@media (min-width: 500px) {
+  .home-text {
+    clip-path: polygon(0 15%, 100% 0, 100% 85%, 0% 100%);
+  }
+}
+@media (min-width: 1024px) {
+  .home-text {
+    clip-path: polygon(0 20%, 100% 0, 100% 80%, 0% 100%);
+  }
 }
 </style>

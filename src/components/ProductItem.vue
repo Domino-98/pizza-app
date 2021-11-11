@@ -3,8 +3,12 @@
     class="
       relative
       flex flex-col
-      mx-5
-      w-1/4
+      mx-auto
+      sm:mx-2
+      lg:mx-4
+      self-stretch
+      w-2/3
+      sm:w-1/4
       bg-white
       pb-5
       rounded-md
@@ -14,10 +18,10 @@
   >
     <img
       alt="Pizza product"
-      class="object-cover h-64 rounded-t-md"
+      class="object-cover h-44 sm:h-36 md:h-44 lg:h-64 rounded-t-md"
       :src="'/src/assets/img/' + product.img"
     />
-    <h2 class="text-2xl py-2">{{ product.name }}</h2>
+    <h2 class="text-2xl sm:text-xl md:text-2xl py-2">{{ product.name }}</h2>
     <p class="text-xs px-1">
       <span v-for="(topping, i) in product.toppings" :key="topping"
         >{{ topping
@@ -30,10 +34,14 @@
     <button
       class="
         mt-2
-        px-5
+        px-2
+        lg:px-5
         py-1
         self-center
         text-xl
+        sm:text-sm
+        md:text-lg
+        lg:text-xl
         bg-transparent
         border-2 border-orange-500
         rounded-2xl

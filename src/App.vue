@@ -36,4 +36,8 @@ export default {
 body {
   background-color: #ebebeb;
 }
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
 </style>

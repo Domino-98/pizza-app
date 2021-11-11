@@ -1,261 +1,273 @@
 <template>
-  <h2 class="text-3xl inline uppercase">Skomponuj własną pizze!</h2>
-  <form
-    class="bg-white max-w-lg py-5 mx-auto mt-8 rounded-xl shadow-xl"
-    @submit.prevent="addToCart"
-  >
-    <h3 class="text-2xl uppercase">Rozmiar pizzy</h3>
-    <div class="flex justify-center mt-2 w-full">
-      <div class="flex items-center px-2">
-        <input
-          id="size-s"
-          v-model="pizza.size"
-          value="S"
-          type="radio"
-          name="size"
-          class="mr-1 h-4 w-4 hidden"
-          @change="updateTotalPrice('S')"
-        />
-
-        <label for="size-s" class="flex items-center cursor-pointer text-l">
-          <span
-            class="
-              w-6
-              h-6
-              inline-block
-              mr-2
-              rounded-full
-              border border-gray-300
-              flex-no-shrink
-            "
-          ></span>
-          Mała (25 cm)</label
-        >
-      </div>
-
-      <div class="flex items-center px-2">
-        <input
-          id="size-m"
-          v-model="pizza.size"
-          value="M"
-          type="radio"
-          name="size"
-          class="mr-1 h-4 w-4 hidden"
-          @change="updateTotalPrice('M')"
-        />
-
-        <label for="size-m" class="flex items-center cursor-pointer text-l">
-          <span
-            class="
-              w-6
-              h-6
-              inline-block
-              mr-2
-              rounded-full
-              border border-gray-300
-              flex-no-shrink
-            "
-          ></span>
-          Średnia (32 cm)</label
-        >
-      </div>
-
-      <div class="flex items-center px-2">
-        <input
-          id="size-l"
-          v-model="pizza.size"
-          value="L"
-          type="radio"
-          name="size"
-          class="mr-1 h-4 w-4 hidden"
-          @change="updateTotalPrice('L')"
-        />
-
-        <label for="size-l" class="flex items-center cursor-pointer text-l">
-          <span
-            class="
-              w-6
-              h-6
-              inline-block
-              mr-2
-              rounded-full
-              border border-gray-300
-              flex-no-shrink
-            "
-          ></span>
-          Duża (45 cm)</label
-        >
-      </div>
-    </div>
-    <h4 class="text-xl uppercase mt-5">Składniki</h4>
-    <div v-if="pizza.size === 'S'" class="w-56 mx-auto">
-      <div
-        v-for="topping in toppings"
-        :key="topping.name"
-        class="mt-1 flex justify-between"
-      >
-        <div class="flex items-center">
-          <label class="inline-flex items-center" :for="topping.name">
-            <input
-              :id="topping.name"
-              v-model="pizza.toppings"
-              type="checkbox"
-              name="ingredients"
-              :value="topping.name"
-              class="form-checkbox h-5 w-5 text-orange-400 rounded-md"
-              WW
-              @change="updatePriceArray($event, topping.price)"
-            /><span class="ml-2 text-gray-700">{{ topping.name }}</span>
-          </label>
-        </div>
-        <span class="text-md">{{ topping.price }}zł</span>
-      </div>
-    </div>
-    <div v-else-if="pizza.size === 'M'" class="w-56 mx-auto">
-      <div
-        v-for="topping in toppings"
-        :key="topping.name"
-        class="mt-1 flex justify-between"
-      >
-        <div class="flex items-center">
-          <label class="inline-flex items-center" :for="topping.name">
-            <input
-              :id="topping.name"
-              v-model="pizza.toppings"
-              type="checkbox"
-              name="ingredients"
-              :value="topping.name"
-              class="form-checkbox h-5 w-5 text-orange-400 rounded-md"
-              @change="updatePriceArray($event, topping.price)"
-            /><span class="ml-2 text-gray-700">{{ topping.name }}</span>
-          </label>
-        </div>
-        <span class="text-md">{{ topping.price * 1.5 }}zł</span>
-      </div>
-    </div>
-    <div v-else-if="pizza.size === 'L'" class="w-56 mx-auto">
-      <div
-        v-for="topping in toppings"
-        :key="topping.name"
-        class="mt-1 flex justify-between"
-      >
-        <div class="flex items-center">
-          <label class="inline-flex items-center" :for="topping.name">
-            <input
-              :id="topping.name"
-              v-model="pizza.toppings"
-              type="checkbox"
-              name="ingredients"
-              :value="topping.name"
-              class="form-checkbox h-5 w-5 text-orange-400 rounded-md"
-              @change="updatePriceArray($event, topping.price)"
-            />
-            <span class="ml-2 text-gray-700">{{ topping.name }}</span>
-          </label>
-        </div>
-        <span class="text-md">{{ topping.price * 2 }}zł</span>
-      </div>
-    </div>
-    <div class="custom-number-input h-10 w-32 mx-auto mb-10 mt-3">
-      <label
-        for="custom-input-number"
-        class="w-full text-black text-sm font-semibold uppercase"
-        >Ilość
-      </label>
+  <h2 class="text-2xl sm:text-3xl inline uppercase">Skomponuj własną pizze!</h2>
+  <div class="flex justify-center">
+    <form
+      class="bg-white mx-5 max-w-sm sm:max-w-lg py-5 mt-8 rounded-xl shadow-xl"
+      @submit.prevent="addToCart"
+    >
+      <h3 class="text-xl sm:text-2xl uppercase">Rozmiar pizzy</h3>
       <div
         class="
-          flex flex-row
-          h-10
-          w-full
-          rounded-lg
-          relative
-          bg-transparent
-          mt-1
+          flex flex-col
+          items-start
+          mx-auto
+          w-40
+          sm:w-full sm:flex-row
+          justify-center
+          mt-2
         "
       >
-        <button
-          id="decrementBtn"
-          class="
-            bg-gray-200
-            text-gray-600
-            hover:text-gray-700 hover:bg-gray-300
-            h-full
-            w-20
-            rounded-l
-            cursor-pointer
-            outline-none
-          "
-          @click.prevent="decrement"
-        >
-          <span class="m-auto text-2xl font-thin">−</span>
-        </button>
-        <input
-          v-model="pizza.amount"
-          type="number"
-          min="1"
-          max="6"
-          required
-          class="
-            outline-none
-            focus:outline-none
-            text-center
-            w-full
-            bg-gray-200
-            font-semibold
-            text-md
-            hover:text-black
-            focus:text-black
-            md:text-basecursor-default
-            flex
-            items-center
-            text-gray-700
-            ==
-          "
-          name="custom-input-number"
-        />
-        <button
-          id="incrementBtn"
-          class="
-            bg-gray-200
-            text-gray-600
-            hover:text-gray-700 hover:bg-gray-300
-            h-full
-            w-20
-            rounded-r
-            cursor-pointer
-          "
-          @click.prevent="increment"
-        >
-          <span class="m-auto text-2xl font-thin">+</span>
-        </button>
+        <div class="flex items-center py-2 sm:py-0 sm:px-2 sm:ml-2">
+          <input
+            id="size-s"
+            v-model="pizza.size"
+            value="S"
+            type="radio"
+            name="size"
+            class="mr-1 h-4 w-4 hidden"
+            @change="updateTotalPrice('S')"
+          />
+
+          <label for="size-s" class="flex items-center cursor-pointer text-l">
+            <span
+              class="
+                w-6
+                h-6
+                inline-block
+                mr-2
+                rounded-full
+                border border-gray-300
+                flex-no-shrink
+              "
+            ></span>
+            Mała (25 cm)</label
+          >
+        </div>
+
+        <div class="flex items-center py-2 sm:py-0 sm:px-2">
+          <input
+            id="size-m"
+            v-model="pizza.size"
+            value="M"
+            type="radio"
+            name="size"
+            class="mr-1 h-4 w-4 hidden"
+            @change="updateTotalPrice('M')"
+          />
+
+          <label for="size-m" class="flex items-center cursor-pointer text-l">
+            <span
+              class="
+                w-6
+                h-6
+                inline-block
+                mr-2
+                rounded-full
+                border border-gray-300
+                flex-no-shrink
+              "
+            ></span>
+            Średnia (32 cm)</label
+          >
+        </div>
+
+        <div class="flex items-center py-2 sm:py-0 sm:px-2 sm:mr-2">
+          <input
+            id="size-l"
+            v-model="pizza.size"
+            value="L"
+            type="radio"
+            name="size"
+            class="mr-1 h-4 w-4 hidden"
+            @change="updateTotalPrice('L')"
+          />
+
+          <label for="size-l" class="flex items-center cursor-pointer text-l">
+            <span
+              class="
+                w-6
+                h-6
+                inline-block
+                mr-2
+                rounded-full
+                border border-gray-300
+                flex-no-shrink
+              "
+            ></span>
+            Duża (45 cm)</label
+          >
+        </div>
       </div>
-    </div>
-    <div class="mt-5">
-      <h5 class="text-l">
-        Podstawa każdej pizzy: <span class="font-semibold"></span>Sos
-        pomidorowy, Mozarella
-      </h5>
-      <h5 class="text-l">Ketchup + Sos czosnkowy GRATIS</h5>
-      <h3 class="text-2xl mt-3">{{ totalPrice }}zł</h3>
-    </div>
-    <button
-      class="
-        mt-2
-        px-5
-        py-1
-        self-center
-        text-xl
-        bg-transparent
-        border-2 border-orange-500
-        rounded-2xl
-        hover:bg-orange-500 hover:text-white
-        transition
-      "
-      type="submit"
-    >
-      Dodaj do koszyka
-    </button>
-  </form>
+      <h4 class="text-xl uppercase mt-5">Składniki</h4>
+      <div v-if="pizza.size === 'S'" class="w-56 mx-auto">
+        <div
+          v-for="topping in toppings"
+          :key="topping.name"
+          class="mt-1 flex justify-between"
+        >
+          <div class="flex items-center">
+            <label class="inline-flex items-center" :for="topping.name">
+              <input
+                :id="topping.name"
+                v-model="pizza.toppings"
+                type="checkbox"
+                name="ingredients"
+                :value="topping.name"
+                class="form-checkbox h-5 w-5 text-orange-400 rounded-md"
+                WW
+                @change="updatePriceArray($event, topping.price)"
+              /><span class="ml-2 text-gray-700">{{ topping.name }}</span>
+            </label>
+          </div>
+          <span class="text-md">{{ topping.price }}zł</span>
+        </div>
+      </div>
+      <div v-else-if="pizza.size === 'M'" class="w-56 mx-auto">
+        <div
+          v-for="topping in toppings"
+          :key="topping.name"
+          class="mt-1 flex justify-between"
+        >
+          <div class="flex items-center">
+            <label class="inline-flex items-center" :for="topping.name">
+              <input
+                :id="topping.name"
+                v-model="pizza.toppings"
+                type="checkbox"
+                name="ingredients"
+                :value="topping.name"
+                class="form-checkbox h-5 w-5 text-orange-400 rounded-md"
+                @change="updatePriceArray($event, topping.price)"
+              /><span class="ml-2 text-gray-700">{{ topping.name }}</span>
+            </label>
+          </div>
+          <span class="text-md">{{ topping.price * 1.5 }}zł</span>
+        </div>
+      </div>
+      <div v-else-if="pizza.size === 'L'" class="w-56 mx-auto">
+        <div
+          v-for="topping in toppings"
+          :key="topping.name"
+          class="mt-1 flex justify-between"
+        >
+          <div class="flex items-center">
+            <label class="inline-flex items-center" :for="topping.name">
+              <input
+                :id="topping.name"
+                v-model="pizza.toppings"
+                type="checkbox"
+                name="ingredients"
+                :value="topping.name"
+                class="form-checkbox h-5 w-5 text-orange-400 rounded-md"
+                @change="updatePriceArray($event, topping.price)"
+              />
+              <span class="ml-2 text-gray-700">{{ topping.name }}</span>
+            </label>
+          </div>
+          <span class="text-md">{{ topping.price * 2 }}zł</span>
+        </div>
+      </div>
+      <div class="custom-number-input h-10 w-32 mx-auto mb-10 mt-3">
+        <label
+          for="custom-input-number"
+          class="w-full text-black text-sm font-semibold uppercase"
+          >Ilość
+        </label>
+        <div
+          class="
+            flex flex-row
+            h-10
+            w-full
+            rounded-lg
+            relative
+            bg-transparent
+            mt-1
+          "
+        >
+          <button
+            id="decrementBtn"
+            class="
+              bg-gray-200
+              text-gray-600
+              hover:text-gray-700 hover:bg-gray-300
+              h-full
+              w-20
+              rounded-l
+              cursor-pointer
+              outline-none
+            "
+            @click.prevent="decrement"
+          >
+            <span class="m-auto text-2xl font-thin">−</span>
+          </button>
+          <input
+            v-model="pizza.amount"
+            type="number"
+            min="1"
+            max="6"
+            required
+            class="
+              outline-none
+              focus:outline-none
+              text-center
+              w-full
+              bg-gray-200
+              font-semibold
+              text-md
+              hover:text-black
+              focus:text-black
+              md:text-basecursor-default
+              flex
+              items-center
+              text-gray-700
+              ==
+            "
+            name="custom-input-number"
+          />
+          <button
+            id="incrementBtn"
+            class="
+              bg-gray-200
+              text-gray-600
+              hover:text-gray-700 hover:bg-gray-300
+              h-full
+              w-20
+              rounded-r
+              cursor-pointer
+            "
+            @click.prevent="increment"
+          >
+            <span class="m-auto text-2xl font-thin">+</span>
+          </button>
+        </div>
+      </div>
+      <div class="mt-5 px-3 sm:px-0">
+        <h5 class="text-base">
+          Podstawa każdej pizzy: <span class="font-semibold"></span>Sos
+          pomidorowy, Mozarella
+        </h5>
+        <h5 class="text-lg">Ketchup + Sos czosnkowy GRATIS</h5>
+        <h3 class="text-2xl mt-3">{{ totalPrice }}zł</h3>
+      </div>
+      <button
+        class="
+          mt-2
+          px-5
+          py-1
+          self-center
+          text-xl
+          bg-transparent
+          border-2 border-orange-500
+          rounded-2xl
+          hover:bg-orange-500 hover:text-white
+          transition
+        "
+        type="submit"
+      >
+        Dodaj do koszyka
+      </button>
+    </form>
+  </div>
 </template>
 
 <script>

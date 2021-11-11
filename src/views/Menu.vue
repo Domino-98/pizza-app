@@ -1,9 +1,22 @@
 <template>
-  <main class="container mx-auto px-10 mt-16">
-    <h1 id="menu" class="text-4xl mb-8 border-b-2 border-orange-500 inline">
+  <main class="container mx-auto mt-16">
+    <h1
+      id="menu"
+      class="text-3xl lg:text-4xl mb-8 border-b-2 border-orange-500 inline"
+    >
       MENU
     </h1>
-    <section class="flex justify-center mt-10 items-stretch flex-wrap mb-16">
+    <section
+      class="
+        flex flex-col
+        sm:flex-row
+        items-center
+        justify-center
+        mt-5
+        sm:mt-10 sm:flex-wrap
+        mb-16
+      "
+    >
       <app-product-item
         v-for="product in products"
         :key="product.id"

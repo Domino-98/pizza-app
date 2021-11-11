@@ -1,24 +1,42 @@
 <template>
-  <main class="container mx-auto px-10 mt-16">
+  <main class="container mx-auto px-5 mt-16">
     <section class="flex justify-center items-center flex-col">
-      <h1 id="cart" class="text-4xl mb-8 border-b-2 border-orange-500">
+      <h1
+        id="cart"
+        class="text-3xl lg:text-4xl mb-8 border-b-2 border-orange-500"
+      >
         KOSZYK
       </h1>
 
-      <div class="w-full max-w-screen-lg flex shadow-lg">
-        <div class="bg-white w-2/3 px-8 py-8">
-          <h3 class="text-2xl text-left block border-b-2 border-gray-300 pb-2">
+      <div class="w-full max-w-screen-lg flex flex-col md:flex-row shadow-lg">
+        <div class="bg-white w-full md:w-2/3 px-4 lg:px-8 py-8">
+          <h3
+            class="text-2xl md:text-left block border-b-2 border-gray-300 pb-2"
+          >
             Produkty
           </h3>
 
-          <div class="grid grid-cols-4 mt-2">
-            <h4 class="text-xl">Produkt</h4>
+          <div class="grid grid-cols-4 xs:grid-cols-5 mt-2">
+            <h4 class="font-bold md:font-normal text-l col-span-2 md:text-xl">
+              Produkt
+            </h4>
 
-            <h4 class="text-xl">Ilość</h4>
+            <h4 class="font-bold md:font-normal text-l md:text-xl">Ilość</h4>
 
-            <h4 class="text-xl">Cena</h4>
+            <h4
+              class="
+                hidden
+                xs:inline
+                font-bold
+                md:font-normal
+                text-l
+                md:text-xl
+              "
+            >
+              Cena
+            </h4>
 
-            <h4 class="text-xl">Suma</h4>
+            <h4 class="font-bold md:font-normal text-l md:text-xl">Suma</h4>
           </div>
 
           <h4
@@ -31,15 +49,15 @@
           <div
             v-for="product in products"
             :key="product.name"
-            class="grid grid-cols-4 content-center mt-2"
+            class="grid grid-cols-4 xs:grid-cols-5 content-center mt-2"
           >
-            <div class="relative text-l group">
+            <div class="relative text-base group col-span-2">
               <img
                 :src="'/src/assets/img/' + product.img"
                 class="mt-5 mb-3 w-1/2 mx-auto rounded-lg"
               />
-              <h5 class="text-l">{{ product.name }}</h5>
-              <h5 class="text-l">
+              <h5 class="text-sm md:text-base">{{ product.name }}</h5>
+              <h5 class="text-sm md:text-base">
                 {{ product.size }} ({{
                   product.size === "S"
                     ? "25cm"
@@ -58,7 +76,8 @@
                   top-0
                   left-0
                   right-0
-                  w-9/12
+                  lg:right-0
+                  w-24
                   p-3
                   text-xs
                   opacity-0
@@ -73,9 +92,11 @@
               </ul>
               <button
                 class="
+                  z-20
                   absolute
                   text-xl
-                  right-0
+                  -left-1
+                  xs:left-0
                   top-5
                   text-gray-700
                   hover:text-red-600
@@ -87,11 +108,21 @@
               </button>
             </div>
 
-            <div class="custom-number-input h-10 w-20 place-self-center">
+            <div
+              class="
+                custom-number-input
+                h-7
+                lg:h-10
+                w-16
+                lg:w-20
+                place-self-center
+              "
+            >
               <div
                 class="
                   flex flex-row
-                  h-10
+                  h-7
+                  lg:h-10
                   w-full
                   rounded-lg
                   relative
@@ -113,7 +144,7 @@
                   "
                   @click.prevent="decrement(product)"
                 >
-                  <span class="m-auto text-2xl font-thin">−</span>
+                  <span class="m-auto text-xl lg:text-2xl font-thin">−</span>
                 </button>
                 <input
                   v-model="product.amount"
@@ -152,19 +183,32 @@
                   "
                   @click.prevent="increment(product)"
                 >
-                  <span class="m-auto text-2xl font-thin">+</span>
+                  <span class="m-auto text-xl lg:text-2xl font-thin">+</span>
                 </button>
               </div>
             </div>
 
-            <div class="text-l place-self-center">{{ product.price }}zł</div>
+            <div class="hidden xs:block text-base place-self-center">
+              {{ product.price }}zł
+            </div>
 
-            <div class="text-l place-self-center">
+            <div class="text-base place-self-center">
               {{ getProductTotalPrice(product) }}zł
             </div>
           </div>
         </div>
-        <div class="bg-gray-100 w-1/3 px-8 py-8 flex flex-col justify-between">
+        <div
+          class="
+            bg-gray-100
+            w-full
+            md:w-1/3
+            px-4
+            lg:px-8
+            py-8
+            flex flex-col
+            justify-between
+          "
+        >
           <h3 class="text-2xl block border-b-2 border-gray-300 pb-2">
             Podsumowanie
           </h3>
@@ -195,12 +239,14 @@
 
             <button
               class="
-                text-white text-xl
+                text-white text-lg
+                lg:text-xl
                 bg-orange-500
                 hover:bg-orange-400
                 transition
                 py-1
-                px-3
+                px-2
+                lg:px-3
               "
               type="button"
             >

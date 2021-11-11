@@ -1,36 +1,39 @@
 <template>
-  <main class="container mx-auto px-10 mt-16">
+  <main class="container mx-auto mt-16">
     <section class="flex justify-center items-center flex-col">
-      <h1 id="contact" class="text-4xl mb-8 border-b-2 border-orange-500">
+      <h1
+        id="contact"
+        class="text-3xl lg:text-4xl mb-8 border-b-2 border-orange-500"
+      >
         KONTAKT
       </h1>
-      <div class="flex">
-        <div class="m-5 mr-16 self-center">
+      <div class="flex flex-col md:flex-row">
+        <div class="m-5 md:mr-8 lg:mr-16 self-center mb-10 md:mb-0">
           <ul class="flex flex-col items-start">
-            <li class="my-2 text-xl">
+            <li class="my-2 text-base lg:text-xl text-left">
               <fa
                 :icon="['fa', 'map-marker-alt']"
-                class="text-3xl mr-3 text-gray-700"
+                class="text-2xl lg:text-3xl mr-3 text-gray-700"
               ></fa
               >Rzeszów, ul. słoneczna 5
             </li>
-            <li class="my-2 text-xl">
+            <li class="my-2 text-base lg:text-xl text-left">
               <fa
                 :icon="['fa', 'phone']"
-                class="text-3xl mr-3 text-gray-700"
+                class="text-2xl lg:text-3xl mr-3 text-gray-700"
               ></fa
               >555-555-555
             </li>
-            <li class="my-2 text-xl">
+            <li class="my-2 text-base lg:text-xl text-left">
               <fa
                 :icon="['fa', 'envelope']"
-                class="text-3xl mr-3 text-gray-700"
+                class="text-2xl lg:text-3xl mr-3 text-gray-700"
               ></fa
               >pizza-app@example.com
             </li>
           </ul>
           <fa :icon="['fa', 'clock']" class="mt-10 text-2xl text-gray-700"></fa>
-          <h3 class="text-2xl uppercase mb-2">Godziny otwarcia</h3>
+          <h3 class="text-base lg:text-2xl uppercase mb-2">Godziny otwarcia</h3>
           <ul>
             <li>Pon-Wt: 8:00 - 22:00</li>
             <li>Sobota, Niedziela: 11:00 - 22:00</li>
@@ -38,9 +41,20 @@
         </div>
         <form
           action=""
-          class="flex flex-col m-5 ml-16 px-10 py-7 bg-gray-50 shadow-lg"
+          class="
+            w-80
+            lg:w-96
+            flex flex-col
+            lg:m-5
+            md:ml-5
+            lg:ml-16
+            px-10
+            py-7
+            bg-gray-50
+            shadow-lg
+          "
         >
-          <h2 class="text-2xl uppercase">Skontaktuj się z nami</h2>
+          <h2 class="text-xl lg:text-2xl uppercase">Skontaktuj się z nami</h2>
           <input
             id="name"
             type="text"

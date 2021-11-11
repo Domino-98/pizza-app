@@ -2,6 +2,7 @@
   <div
     class="
       fixed
+      z-30
       inset-0
       bg-gray-500 bg-opacity-50
       flex
@@ -11,7 +12,7 @@
     @click.self="closeModal"
   >
     <div class="bg-white rounded-lg">
-      <div class="w-96 border-t-8 rounded-lg">
+      <div class="w-80 xs:w-96 border-t-8 rounded-lg">
         <div class="w-full pt-5 px-4 flex flex-col items-center">
           <h4 class="text-xl">Pomyślnie dodano do koszyka</h4>
           <img
@@ -19,7 +20,7 @@
             class="w-36 mt-5 mb-3 rounded-lg"
           />
           <div class="flex flex-col items-center">
-            <h5 class="text-l font-bold">{{ pizza.name }}</h5>
+            <h5 class="text-lg font-bold">{{ pizza.name }}</h5>
             <ul class="flex flex-wrap flex-row w-9/12 justify-center">
               <li v-for="(topping, i) in pizza.toppings" :key="topping">
                 {{ topping }}
@@ -40,7 +41,8 @@
           href="#"
           class="
             w-1/2
-            px-4
+            px-1
+            xs:px-4
             py-3
             text-center
             bg-gray-100
@@ -63,7 +65,8 @@
           href="#"
           class="
             w-1/2
-            px-4
+            px-1
+            xs:px-4
             py-3
             bg-orange-500
             hover:bg-orange-400

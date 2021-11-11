@@ -26,14 +26,27 @@
       "
     ></div>
     <header class="absolute">
-      <h1 class="text-4xl uppercase mb-12 bold tracking-wider text-white">
+      <h1
+        class="
+          text-2xl
+          sm:text-3xl
+          md:text-4xl
+          uppercase
+          mb-12
+          bold
+          tracking-wider
+          text-white
+        "
+      >
         Najlepsza pizza w mieście
       </h1>
       <router-link
         class="
           uppercase
           border-4 border-orange-500
-          text-white text-3xl
+          text-white text-xl
+          sm:text-2xl
+          md:text-3xl
           px-5
           py-3
           rounded-xl
@@ -46,7 +59,7 @@
           hash: '#menu',
         }"
       >
-        Sprawdź menu / Zamów online
+        Sprawdź menu<span class="hidden xs:inline"> / Zamów online</span>
       </router-link>
     </header>
   </div>

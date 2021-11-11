@@ -1,11 +1,11 @@
 <template>
-  <form class="mt-14 flex flex-col w-72" @submit.prevent="submitForm">
+  <form class="mt-14 flex flex-col w-56 xs:w-72" @submit.prevent="submitForm">
     <div
       v-if="loginShowAlert"
       :class="loginAlertVariant"
-      class="bg-green-500 text-white py-3 w-full mb-5"
+      class="bg-green-500 text-white py-3 px-3 w-full mb-5"
     >
-      <h5 class="text-l">{{ loginAlertMsg }}</h5>
+      <h5 class="text-base">{{ loginAlertMsg }}</h5>
     </div>
     <div class="relative flex flex-col place-items-start mb-5">
       <input
@@ -139,11 +139,11 @@ export default {
     // Async function
     submitForm() {
       this.v$.$validate();
-      this.loginInSubmission = true;
-      this.loginShowAlert = true;
-      this.loginAlertVariant = "bg-blue-500";
-      this.loginAlertMsg = "Proszę czekać. Trwa logowanie.";
       if (!this.v$.$error) {
+        this.loginInSubmission = true;
+        this.loginShowAlert = true;
+        this.loginAlertVariant = "bg-blue-500";
+        this.loginAlertMsg = "Proszę czekać. Trwa logowanie.";
         let user = {
           email: this.email,
           password: this.password,
@@ -153,11 +153,12 @@ export default {
         this.loginAlertVariant = "bg-green-500";
         this.loginAlertMsg = "Pomyślnie zalogowano!";
         window.location.reload();
-      } else {
-        this.loginAlertVariant = "bg-red-500";
-        this.loginAlertMsg = "Wprowadź poprawne dane!";
-        this.loginInSubmission = false;
       }
+      //   else {
+      //     this.loginAlertVariant = "bg-red-500";
+      //     this.loginAlertMsg = "Wprowadź poprawne dane!";
+      //     this.loginInSubmission = false;
+      //   }
     },
   },
 };

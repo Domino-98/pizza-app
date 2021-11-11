@@ -3,7 +3,7 @@
     <div
       v-show="authModalShow"
       class="
-        z-10
+        z-30
         fixed
         inset-0
         bg-black bg-opacity-50
@@ -17,10 +17,12 @@
       <div class="relative bg-white px-12 pb-6 rounded-md mt-10">
         <button
           class="
+            z-10
             absolute
             text-xl
             right-0
-            -top-8
+            -top-16
+            xs:-top-8
             text-white
             hover:text-orange-500
           "

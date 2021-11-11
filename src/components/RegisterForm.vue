@@ -1,11 +1,11 @@
 <template>
-  <form class="mt-14 flex flex-col w-72" @submit.prevent="submitForm">
+  <form class="mt-14 flex flex-col w-56 xs:w-72" @submit.prevent="submitForm">
     <div
       v-if="regShowAlert"
       :class="regAlertVariant"
-      class="bg-green-500 text-white py-3 w-full mb-5"
+      class="bg-green-500 text-white py-3 px-3 w-full mb-5"
     >
-      <h5 class="text-l">{{ regAlertMsg }}</h5>
+      <h5 class="text-base">{{ regAlertMsg }}</h5>
     </div>
     <div class="relative flex flex-col place-items-start mb-5">
       <input
@@ -348,11 +348,11 @@ export default {
     // Async function
     submitForm() {
       this.v$.$validate();
-      this.regInSubmission = true;
-      this.regShowAlert = true;
-      this.regAlertVariant = "bg-blue-500";
-      this.regAlertMsg = "Proszę czekać. Trwa tworzenie konta.";
       if (!this.v$.$error) {
+        this.regInSubmission = true;
+        this.regShowAlert = true;
+        this.regAlertVariant = "bg-blue-500";
+        this.regAlertMsg = "Proszę czekać. Trwa tworzenie konta.";
         let user = {
           name: this.name,
           email: this.email,
@@ -364,11 +364,12 @@ export default {
         this.regAlertVariant = "bg-green-500";
         this.regAlertMsg = "Pomyślnie zarejestrowano!";
         window.location.reload();
-      } else {
-        this.regAlertVariant = "bg-red-500";
-        this.regAlertMsg = "Wprowadź poprawne dane!";
-        this.regInSubmission = false;
       }
+      //   else {
+      //     this.regAlertVariant = "bg-red-500";
+      //     this.regAlertMsg = "Wprowadź poprawne dane!";
+      //     this.regInSubmission = false;
+      //   }
     },
   },
 };
