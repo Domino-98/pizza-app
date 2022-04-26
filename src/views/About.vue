@@ -20,7 +20,7 @@
       </p>
       <div class="flex flex-col-reverse md:flex-row">
         <img
-          src="../assets/img/about-img-1.jpg"
+          src="/assets/img/about-img-1.jpg"
           class="md:w-1/2"
           alt="About image 1"
         />
@@ -60,7 +60,7 @@
           </p>
         </div>
         <img
-          src="../assets/img/about-img-2.jpg"
+          src="/assets/img/about-img-2.jpg"
           class="md:w-1/2"
           alt="About image 2"
         />

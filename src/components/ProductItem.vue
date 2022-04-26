@@ -19,7 +19,7 @@
     <img
       alt="Pizza product"
       class="object-cover h-44 sm:h-36 md:h-44 lg:h-64 rounded-t-md"
-      :src="'/src/assets/img/' + product.img"
+      :src="'/assets/img/' + product.img"
     />
     <h2 class="text-2xl sm:text-xl md:text-2xl py-2">{{ product.name }}</h2>
     <p class="text-xs px-1">

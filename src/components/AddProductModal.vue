@@ -16,7 +16,7 @@
         <div class="w-full pt-5 px-4 flex flex-col items-center">
           <h4 class="text-xl">Pomyślnie dodano do koszyka</h4>
           <img
-            :src="'/src/assets/img/' + pizza.img"
+            :src="'/assets/img/' + pizza.img"
             class="w-36 mt-5 mb-3 rounded-lg"
           />
           <div class="flex flex-col items-center">

@@ -53,7 +53,7 @@
           >
             <div class="relative text-base group col-span-2">
               <img
-                :src="'/src/assets/img/' + product.img"
+                :src="'/assets/img/' + product.img"
                 class="mt-5 mb-3 w-1/2 mx-auto rounded-lg"
               />
               <h5 class="text-sm md:text-base">{{ product.name }}</h5>

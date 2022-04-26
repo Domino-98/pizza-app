@@ -2,7 +2,7 @@
   <main class="container mx-auto mt-4 md:mt-8">
     <section class="flex flex-col xs:flex-row items-center mx-5 md:mx-10">
       <img
-        src="../assets/img/home-img.jpg"
+        src="/assets/img/home-img.jpg"
         class="home-img h-72 xs:h-80 lg:h-96 w-9/12 xs:w-1/2"
         alt="Pizza z pieca"
       />

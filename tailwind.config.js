@@ -2,7 +2,7 @@ const colors = require("tailwindcss/colors");
 
 module.exports = {
   mode: "jit",
-  purge: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
+  purge: ["./public/**/*.html", "./src/**/*.vue"],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
@@ -20,7 +20,7 @@ module.exports = {
       black: colors.black,
     },
     backgroundImage: {
-      "header-img": "url('/src/assets/img/header-img.jpg')",
+      "header-img": "url('/assets/img/header-img.jpg')",
     },
     fontFamily: {
       "dancing-script": ["Dancing Script", "Arial", "sans-serif"],

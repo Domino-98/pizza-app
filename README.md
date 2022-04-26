@@ -1,3 +1,3 @@
 # Vue 3 + Vite
 
-## Pizza App (Options API)
+## Pizza App - Front-end (Options API)
